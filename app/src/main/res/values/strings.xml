@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Guidomia</string>
+    <string name="open_menu">Open the menu</string>
+    <string name="car_price">Price: %dk</string>
+    <string name="error_unknown">Unknown error</string>
+    <string name="could_not_load_cars">Could not load the list of cars</string>
+</resources>

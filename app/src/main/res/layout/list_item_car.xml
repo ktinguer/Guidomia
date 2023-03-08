@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="car"
+            type="com.cnexia.guidomia.domain.model.CarUi" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_gary"
+        android:paddingBottom="@dimen/space_12"
+        tools:layout_marginTop="@dimen/space_8">
+
+        <ImageView
+            android:id="@+id/image_car"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/space_12"
+            android:layout_marginTop="@dimen/space_12"
+            android:contentDescription="@null"
+            app:imageSrc="@{car.imageId}"
+            app:layout_constraintDimensionRatio="3:2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/rating_bar"
+            tools:src="@drawable/default_car_image" />
+
+        <TextView
+            android:id="@+id/txt_car_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/space_12"
+            android:text="@{car.model}"
+            android:textColor="@color/text_color"
+            android:textSize="@dimen/text_size_20"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/image_car"
+            app:layout_constraintTop_toTopOf="@id/image_car"
+            tools:text="Car name" />
+
+        <TextView
+            android:id="@+id/car_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color"
+            android:text="@{@string/car_price(car.marketPrice)}"
+            app:layout_constraintStart_toStartOf="@+id/txt_car_name"
+            app:layout_constraintTop_toBottomOf="@+id/txt_car_name"
+            tools:text="Price: 12k" />
+
+        <RatingBar
+            android:id="@+id/rating_bar"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/space_12"
+            android:numStars="5"
+            android:rating="@{car.rating}"
+            app:layout_constraintStart_toStartOf="@+id/car_price"
+            app:layout_constraintTop_toBottomOf="@+id/car_price"
+            tools:rating="3" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
