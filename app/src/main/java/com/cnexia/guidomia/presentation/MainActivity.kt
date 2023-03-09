@@ -12,6 +12,7 @@ import com.cnexia.guidomia.R
 import com.cnexia.guidomia.databinding.ActivityMainBinding
 import com.cnexia.guidomia.domain.model.Cars
 import com.cnexia.guidomia.presentation.adapter.CarsAdapter
+import com.cnexia.guidomia.presentation.adapter.CustomSpinnerAdapter
 import com.cnexia.guidomia.util.*
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,11 +26,31 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         observeViewModel()
+
+        setupSpinnerListener(binding.spinnerMake) { _, item ->
+            viewModel.makeSelected(item)
+        }
+
+        setupSpinnerListener(binding.spinnerModel) { _, item ->
+            val selectedItem = binding.spinnerMake.selectedItem
+            viewModel.modelSelected(item, selectedItem.toString())
+        }
     }
 
 
     private fun observeViewModel() {
+
+        observe(viewModel.makeList, ::handleMakesData)
+        observe(viewModel.modelList, ::handleModelsData)
         observe(viewModel.cars, ::handleCarsData)
+    }
+
+    private fun handleMakesData(makes: List<String>) {
+            binding.spinnerMake.adapter = CustomSpinnerAdapter(this, makes)
+    }
+
+    private fun handleModelsData(models: List<String>) {
+            binding.spinnerModel.adapter = CustomSpinnerAdapter(this, models)
     }
 
     private fun handleCarsData(carsResource: Resource<Cars>) = when (carsResource) {

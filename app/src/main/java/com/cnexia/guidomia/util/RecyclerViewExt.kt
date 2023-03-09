@@ -8,6 +8,7 @@ fun RecyclerView.addDivider(
     context: Context,
     dividerDrawable: Drawable?
 ) {
+    if (itemDecorationCount > 0) removeItemDecorationAt(0)
     val divider = dividerDrawable ?: return
     val dividerItemDecoration = DividerItem(context, divider)
     dividerItemDecoration.setDrawable(divider)

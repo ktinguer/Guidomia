@@ -11,7 +11,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:background="@android:color/white">
 
             <ImageView
@@ -26,18 +26,98 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/tv_header_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_16"
+                android:text="@string/tacoma"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_40"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/tv_header_subtitle"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_header_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_20"
+                android:layout_marginBottom="@dimen/space_20"
+                android:text="@string/tacoma_subtitle"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_20"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/header_image"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layout_filter"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/space_12"
+                android:layout_marginTop="@dimen/space_16"
+                android:layout_marginEnd="@dimen/space_12"
+                android:background="@drawable/bg_filter"
+                android:paddingBottom="@dimen/space_16"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header_image">
+
+                <TextView
+                    android:id="@+id/tv_spinner_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_16"
+                    android:layout_marginTop="@dimen/space_12"
+                    android:text="@string/filters"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_20"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Spinner
+                    android:id="@+id/spinner_make"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_16"
+                    android:layout_marginTop="@dimen/space_12"
+                    android:layout_marginEnd="@dimen/space_16"
+                    android:background="@null"
+                    android:contentDescription="@string/select_car_maker"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_spinner_label"
+                    tools:background="@drawable/bg_spinner" />
+
+                <Spinner
+                    android:id="@+id/spinner_model"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/space_16"
+                    android:layout_marginTop="@dimen/space_12"
+                    android:layout_marginEnd="@dimen/space_16"
+                    android:background="@null"
+                    android:contentDescription="@string/select_car_model"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/spinner_make"
+                    tools:background="@drawable/bg_spinner" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/cars_recycler_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_12"
                 android:orientation="vertical"
-                android:paddingTop="@dimen/space_12"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/header_image"
+                app:layout_constraintTop_toBottomOf="@id/layout_filter"
                 tools:itemCount="4"
                 tools:listitem="@layout/list_item_car" />
 
@@ -45,11 +125,11 @@
                 android:id="@+id/progressBar"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
+                android:layout_marginTop="@dimen/space_32"
                 android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/header_image" />
+                app:layout_constraintTop_toBottomOf="@id/layout_filter" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
