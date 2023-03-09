@@ -20,6 +20,7 @@ fun Car.toCarUi(): CarUi {
         customerPrice = customerPrice,
         marketPrice = marketPrice.toInt() / 1000,
         prosList = prosList,
-        consList = consList
+        consList = consList,
+        expanded = false
     )
 }

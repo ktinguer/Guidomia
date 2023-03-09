@@ -10,7 +10,8 @@ data class CarUi(
     val customerPrice: Double,
     val marketPrice: Int,
     val prosList: List<String>,
-    val consList: List<String>
+    val consList: List<String>,
+    var expanded: Boolean
 ) {
     val imageId: Int
         @DrawableRes

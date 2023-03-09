@@ -16,7 +16,7 @@ class CarsApi @Inject constructor(
 
 
     suspend fun getAllCars(): List<Car> {
-        delay(5000)
+        delay(3000)
         val json = loadJSONFromAsset("car_list.json")
         return gson.fromJson(json, object : TypeToken<List<Car>>() {}.type)
     }

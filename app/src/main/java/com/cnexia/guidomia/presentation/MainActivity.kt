@@ -32,12 +32,14 @@ class MainActivity : AppCompatActivity() {
         observe(viewModel.cars, ::handleCarsData)
     }
 
-    private fun handleCarsData(carsResource: Resource<Cars>) = when(carsResource){
+    private fun handleCarsData(carsResource: Resource<Cars>) = when (carsResource) {
         is Resource.Loading -> binding.progressBar.toVisible()
         is Resource.Success -> carsResource.data.let {
             binding.progressBar.toGone()
             it?.let {
-                carsAdapter = CarsAdapter(it.carsList)
+                val cars = it.carsList
+                if (cars.isNotEmpty()) cars[0].expanded = true
+                carsAdapter = CarsAdapter(cars)
                 binding.carsRecyclerView.adapter = carsAdapter
                 binding.carsRecyclerView.addDivider(this, ContextCompat.getDrawable(this, R.drawable.list_divider))
             }

@@ -2,6 +2,9 @@
 <resources>
     <dimen name="space_8">8dp</dimen>
     <dimen name="space_12">12dp</dimen>
+    <dimen name="space_16">16dp</dimen>
+    <dimen name="space_32">32dp</dimen>
 
+    <dimen name="text_size_18">18sp</dimen>
     <dimen name="text_size_20">20sp</dimen>
 </resources>

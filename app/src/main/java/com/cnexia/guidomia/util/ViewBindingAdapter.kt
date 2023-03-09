@@ -7,3 +7,6 @@ import androidx.databinding.BindingAdapter
 fun loadImage(view: ImageView, imageResource: Int) {
     view.setImageResource(imageResource)
 }
+
+
+
