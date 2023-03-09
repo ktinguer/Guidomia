@@ -1,8 +1,7 @@
 package com.cnexia.guidomia.data.repository
 
 import com.cnexia.guidomia.R
-import com.cnexia.guidomia.data.model.Car
-import com.cnexia.guidomia.data.model.toCarUi
+import com.cnexia.guidomia.data.local.CarsLocalDataSource
 import com.cnexia.guidomia.data.remote.CarsApi
 import com.cnexia.guidomia.domain.model.Cars
 import com.cnexia.guidomia.domain.repository.CarRepository
@@ -12,13 +11,20 @@ import com.google.gson.JsonSyntaxException
 import java.io.IOException
 
 class CarRepositoryImpl(
-    private val remoteDataSource: CarsApi
+    private val remoteDataSource: CarsApi,
+    private val localDataSource: CarsLocalDataSource
 ) : CarRepository {
 
     override suspend fun getAllCars(): Resource<Cars> {
         return try {
-            val response = remoteDataSource.getAllCars().map(Car::toCarUi)
-            Resource.Success(data = Cars(response))
+            val localCars = localDataSource.getCarList()
+            if (localCars.isNotEmpty()) return Resource.Success(data = Cars(localCars))
+
+            val remoteCars = remoteDataSource.getAllCars()
+            localDataSource.saveCars(remoteCars)
+
+            return Resource.Success(data = Cars(localDataSource.getCarList()))
+
         } catch (e: JsonSyntaxException) {
             e.printStackTrace()
             e.message?.let { Resource.Error(message = UiText.DynamicString(it)) }

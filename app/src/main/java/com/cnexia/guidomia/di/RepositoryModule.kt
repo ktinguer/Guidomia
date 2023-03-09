@@ -1,5 +1,6 @@
 package com.cnexia.guidomia.di
 
+import com.cnexia.guidomia.data.local.CarsLocalDataSource
 import com.cnexia.guidomia.data.remote.CarsApi
 import com.cnexia.guidomia.data.repository.CarRepositoryImpl
 import com.cnexia.guidomia.domain.repository.CarRepository
@@ -13,7 +14,7 @@ import dagger.hilt.components.SingletonComponent
 object RepositoryModule {
 
     @Provides
-    fun provideCarRepository(remoteDataSource: CarsApi): CarRepository {
-        return CarRepositoryImpl(remoteDataSource)
+    fun provideCarRepository(remoteDataSource: CarsApi, localDataSource: CarsLocalDataSource): CarRepository {
+        return CarRepositoryImpl(remoteDataSource, localDataSource)
     }
 }
